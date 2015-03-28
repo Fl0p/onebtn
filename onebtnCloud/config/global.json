@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.0"
+  },
+  "applications": {
+    "_default": {
+      "link": "onebtn"
+    },
+    "onebtn": {
+      "applicationId": "o1nRlbm4VjDojTHih6CsI43cYaGMQZngH6pWa6Cy",
+      "masterKey": "8awTT8ouXNgYv2h6iJL51eWCZffKFtKoKWeCuhjJ"
+    }
+  }
+}
