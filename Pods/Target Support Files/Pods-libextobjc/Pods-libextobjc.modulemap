@@ -1,6 +1,0 @@
-framework module libextobjc {
-  umbrella header "Pods-libextobjc-umbrella.h"
-
-  export *
-  module * { export * }
-}
