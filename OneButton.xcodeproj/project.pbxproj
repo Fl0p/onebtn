@@ -14,18 +14,7 @@
 		DBAFAF801AC6C0B400D404C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBAFAF7E1AC6C0B400D404C7 /* Main.storyboard */; };
 		DBAFAF821AC6C0B400D404C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAFAF811AC6C0B400D404C7 /* Images.xcassets */; };
 		DBAFAF851AC6C0B400D404C7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBAFAF831AC6C0B400D404C7 /* LaunchScreen.xib */; };
-		DBAFAF911AC6C0B400D404C7 /* OneButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAFAF901AC6C0B400D404C7 /* OneButtonTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DBAFAF8B1AC6C0B400D404C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBAFAF691AC6C0B400D404C7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAFAF701AC6C0B400D404C7;
-			remoteInfo = OneButton;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1BD5139582635B0A110C2A46 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,7 +29,6 @@
 		DBAFAF7F1AC6C0B400D404C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBAFAF811AC6C0B400D404C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DBAFAF841AC6C0B400D404C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		DBAFAF8A1AC6C0B400D404C7 /* OneButtonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneButtonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBAFAF8F1AC6C0B400D404C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBAFAF901AC6C0B400D404C7 /* OneButtonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneButtonTests.m; sourceTree = "<group>"; };
 		DBAFAFA71AC6D6E700D404C7 /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
@@ -55,13 +43,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F70C7E52922DA17FDBFE58B /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBAFAF871AC6C0B400D404C7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				DBAFAF711AC6C0B400D404C7 /* OneButton.app */,
-				DBAFAF8A1AC6C0B400D404C7 /* OneButtonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,24 +183,6 @@
 			productReference = DBAFAF711AC6C0B400D404C7 /* OneButton.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DBAFAF891AC6C0B400D404C7 /* OneButtonTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DBAFAF971AC6C0B400D404C7 /* Build configuration list for PBXNativeTarget "OneButtonTests" */;
-			buildPhases = (
-				DBAFAF861AC6C0B400D404C7 /* Sources */,
-				DBAFAF871AC6C0B400D404C7 /* Frameworks */,
-				DBAFAF881AC6C0B400D404C7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DBAFAF8C1AC6C0B400D404C7 /* PBXTargetDependency */,
-			);
-			name = OneButtonTests;
-			productName = OneButtonTests;
-			productReference = DBAFAF8A1AC6C0B400D404C7 /* OneButtonTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -232,10 +194,6 @@
 				TargetAttributes = {
 					DBAFAF701AC6C0B400D404C7 = {
 						CreatedOnToolsVersion = 6.2;
-					};
-					DBAFAF891AC6C0B400D404C7 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = DBAFAF701AC6C0B400D404C7;
 					};
 				};
 			};
@@ -253,7 +211,6 @@
 			projectRoot = "";
 			targets = (
 				DBAFAF701AC6C0B400D404C7 /* OneButton */,
-				DBAFAF891AC6C0B400D404C7 /* OneButtonTests */,
 			);
 		};
 /* End PBXProject section */
@@ -266,13 +223,6 @@
 				DBAFAF801AC6C0B400D404C7 /* Main.storyboard in Resources */,
 				DBAFAF851AC6C0B400D404C7 /* LaunchScreen.xib in Resources */,
 				DBAFAF821AC6C0B400D404C7 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBAFAF881AC6C0B400D404C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,23 +272,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBAFAF861AC6C0B400D404C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBAFAF911AC6C0B400D404C7 /* OneButtonTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DBAFAF8C1AC6C0B400D404C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAFAF701AC6C0B400D404C7 /* OneButton */;
-			targetProxy = DBAFAF8B1AC6C0B400D404C7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DBAFAF7E1AC6C0B400D404C7 /* Main.storyboard */ = {
@@ -377,7 +311,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Raman Yankouski (QBW66YA5L8)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -394,9 +328,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "eaf031e1-eb7d-4560-a63a-60d2ea52b188";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -419,7 +354,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Raman Yankouski (QBW66YA5L8)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -430,8 +365,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "eaf031e1-eb7d-4560-a63a-60d2ea52b188";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -462,40 +398,6 @@
 			};
 			name = Release;
 		};
-		DBAFAF981AC6C0B400D404C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OneButtonTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneButton.app/OneButton";
-			};
-			name = Debug;
-		};
-		DBAFAF991AC6C0B400D404C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OneButtonTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneButton.app/OneButton";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,15 +415,6 @@
 			buildConfigurations = (
 				DBAFAF951AC6C0B400D404C7 /* Debug */,
 				DBAFAF961AC6C0B400D404C7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DBAFAF971AC6C0B400D404C7 /* Build configuration list for PBXNativeTarget "OneButtonTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DBAFAF981AC6C0B400D404C7 /* Debug */,
-				DBAFAF991AC6C0B400D404C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
