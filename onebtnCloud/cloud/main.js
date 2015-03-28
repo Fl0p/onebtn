@@ -11,7 +11,10 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 
-function createNewPush() {
+function createNewPush(userId) {
+    
+    
+    console.log(" createNewPush " + userId);
     
     var pushInst = new Push();
     
@@ -22,6 +25,7 @@ function createNewPush() {
     pushInst.setACL(acl);
     
     pushInst.set("value", 3);
+    pushInst.set("userId", userId);
     
     pushInst.save();
     
@@ -44,21 +48,21 @@ Parse.Cloud.define("getPushes", function(request, response) {
                    }
                    
                    var query = new Parse.Query(Push);
-                   
+                   query.equalTo("userId", userId);
                    query.first({
                               success: function(result) {
                                
+                               var newPush = null;
+                               
                                if (result == null) {
                                     console.log("push NOT Found");
-                               
+                                    newPush = createNewPush(userId);
                                } else {
-                               
                                     console.log("push Found");
+                                    newPush = result;
                                }
 
-                               console.log(result);
-                               response.success(result);
-                               
+                               response.success(newPush);
                                
                                },
                               

@@ -21,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    [self getPushes];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -30,8 +31,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onPush:(id)sender {
-    NSLog(@"onPush");
+- (void)getPushes {
     
     PFUser* user = [PFUser currentUser];
     NSString* userId = user.objectId;
@@ -41,9 +41,26 @@
     
     [PFCloud callFunctionInBackground:@"getPushes"
                        withParameters:@{@"userId":userId, @"installationId":installationId}
-                                block:^(NSArray *results, NSError *error) {
-                                    NSLog(@"result %@ error %@",results,error);
+                                block:^(PFObject *result, NSError *error) {
+                                    
+                                    
+                                    NSLog(@"result %@ error %@",result,error);
+                                    
+                                    if (result) {
+                                        NSNumber* value = [result objectForKey:@"value"];
+                                        
+                                        self.label.text = [NSString stringWithFormat:@"You can push button %@ times. \n Every time you push button random person will recieve your push",value];
+                                        
+                                        self.button.enabled = value.intValue > 0;
+                                        
+                                    }
+                                    
                                 }];
+}
+
+- (IBAction)onPush:(id)sender {
+    NSLog(@"onPush");
+
 }
 
 @end

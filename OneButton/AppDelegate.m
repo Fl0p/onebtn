@@ -24,8 +24,9 @@
     
     [PFUser enableAutomaticUser];
     
-    [self parseRun];
-    
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     //Notifications
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
@@ -38,15 +39,34 @@
          UIRemoteNotificationTypeSound];
     }
     
+    
+    [self parseRun];
+ 
     return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current Installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    PFUser* currentUser = [PFUser currentUser];
+    
+    
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation[@"user"] = [PFUser currentUser];
-    [currentInstallation saveInBackground];
+    currentInstallation[@"user"] = currentUser;
+    
+    currentInstallation.channels = @[@"GLOBAL"];
+    
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"saved installation%@",error);
+        
+        currentUser[@"installation"] = currentInstallation;
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"saved user%@",error);
+        }];
+        
+    }];
+    
+    
     
 }
 
@@ -84,7 +104,10 @@
     currentInstallation[@"bundleVersion"] = bundleVersion;
     currentInstallation[@"bundleVersionString"] = bundleVersionString;
     
-    [currentInstallation saveInBackground];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        //
+        NSLog(@"saved installation%@",error);
+    }];
 }
 
 
