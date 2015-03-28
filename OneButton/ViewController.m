@@ -21,11 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [PFUser enableAutomaticUser];
 
-    PFInstallation* install = [PFInstallation currentInstallation];
-    NSLog(@"install %@",install);
-    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -37,8 +33,8 @@
 - (IBAction)onPush:(id)sender {
     NSLog(@"onPush");
     
-    [PFCloud callFunctionInBackground:@"hello"
-                       withParameters:@{@"parameterKey": @"parameterValue"}
+    [PFCloud callFunctionInBackground:@"getPushes"
+                       withParameters:@{}
                                 block:^(NSArray *results, NSError *error) {
                                     NSLog(@"result %@ error %@",results,error);
                                 }];

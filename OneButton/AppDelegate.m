@@ -21,6 +21,13 @@
     // Override point for customization after application launch.
     
     [Parse setApplicationId:@"o1nRlbm4VjDojTHih6CsI43cYaGMQZngH6pWa6Cy" clientKey:@"xBGm1B8kL4Ew3Vo9zRvByguSDb0V3TCCIrVSKNkF"];
+    
+    [PFUser enableAutomaticUser];
+    
+    PFInstallation* install = [PFInstallation currentInstallation];
+    
+    NSLog(@"install %@",install);
+    
     return YES;
 }
 
@@ -39,6 +46,20 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    PFUser* user = [PFUser currentUser];
+    NSNumber* runCount =  [user objectForKey:@"runCount"];
+    
+    if (!runCount) {
+        runCount = @1;
+    } else {
+        runCount = [NSNumber numberWithInteger:runCount.integerValue + 1];
+    }
+    
+    [user setObject:runCount forKey:@"runCount"];
+    [user saveEventually];
+    
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
