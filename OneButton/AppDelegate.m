@@ -24,11 +24,30 @@
     
     [PFUser enableAutomaticUser];
     
-    PFInstallation* install = [PFInstallation currentInstallation];
+    [self parseRun];
     
-    NSLog(@"install %@",install);
+    
+    //Notifications
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings  settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+         UIRemoteNotificationTypeAlert|
+         UIRemoteNotificationTypeSound];
+    }
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current Installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation[@"user"] = [PFUser currentUser];
+    [currentInstallation saveInBackground];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -43,22 +62,42 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [self parseRun];
 }
+
+
+-  (void)parseRun {
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    
+    [currentInstallation setObject:[NSDate date] forKey:@"lastRunDate"];
+    
+    NSInteger runCount = [currentInstallation objectForKeyedSubscript:@"runCount"]? [(NSString*)[currentInstallation objectForKeyedSubscript:@"runCount"] integerValue] : 0;
+    runCount++;
+    
+    currentInstallation[@"runCount"] = [NSString stringWithFormat:@"%ld", (long)runCount];
+    
+    NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *bundleVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    currentInstallation[@"bundleVersion"] = bundleVersion;
+    currentInstallation[@"bundleVersionString"] = bundleVersionString;
+    
+    [currentInstallation saveInBackground];
+}
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-    PFUser* user = [PFUser currentUser];
-    NSNumber* runCount =  [user objectForKey:@"runCount"];
     
-    if (!runCount) {
-        runCount = @1;
-    } else {
-        runCount = [NSNumber numberWithInteger:runCount.integerValue + 1];
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0)
+    {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
     }
-    
-    [user setObject:runCount forKey:@"runCount"];
-    [user saveEventually];
-    
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
