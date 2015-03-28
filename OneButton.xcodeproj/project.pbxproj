@@ -43,6 +43,9 @@
 		DBAFAF8A1AC6C0B400D404C7 /* OneButtonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneButtonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBAFAF8F1AC6C0B400D404C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBAFAF901AC6C0B400D404C7 /* OneButtonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneButtonTests.m; sourceTree = "<group>"; };
+		DBAFAFA71AC6D6E700D404C7 /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		DBAFAFA91AC6D6E700D404C7 /* global.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = global.json; sourceTree = "<group>"; };
+		DBAFAFAB1AC6D6E700D404C7 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		F45C19970642AF87E1FCA4BF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +88,7 @@
 		DBAFAF681AC6C0B400D404C7 = {
 			isa = PBXGroup;
 			children = (
+				DBAFAFA51AC6D6E700D404C7 /* onebtnCloud */,
 				DBAFAF731AC6C0B400D404C7 /* OneButton */,
 				DBAFAF8D1AC6C0B400D404C7 /* OneButtonTests */,
 				DBAFAF721AC6C0B400D404C7 /* Products */,
@@ -141,6 +145,40 @@
 				DBAFAF8F1AC6C0B400D404C7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBAFAFA51AC6D6E700D404C7 /* onebtnCloud */ = {
+			isa = PBXGroup;
+			children = (
+				DBAFAFA61AC6D6E700D404C7 /* cloud */,
+				DBAFAFA81AC6D6E700D404C7 /* config */,
+				DBAFAFAA1AC6D6E700D404C7 /* public */,
+			);
+			path = onebtnCloud;
+			sourceTree = "<group>";
+		};
+		DBAFAFA61AC6D6E700D404C7 /* cloud */ = {
+			isa = PBXGroup;
+			children = (
+				DBAFAFA71AC6D6E700D404C7 /* main.js */,
+			);
+			path = cloud;
+			sourceTree = "<group>";
+		};
+		DBAFAFA81AC6D6E700D404C7 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				DBAFAFA91AC6D6E700D404C7 /* global.json */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		DBAFAFAA1AC6D6E700D404C7 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				DBAFAFAB1AC6D6E700D404C7 /* index.html */,
+			);
+			path = public;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

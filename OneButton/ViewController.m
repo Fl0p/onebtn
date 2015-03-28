@@ -36,6 +36,12 @@
 
 - (IBAction)onPush:(id)sender {
     NSLog(@"onPush");
+    
+    [PFCloud callFunctionInBackground:@"hello"
+                       withParameters:@{@"parameterKey": @"parameterValue"}
+                                block:^(NSArray *results, NSError *error) {
+                                    NSLog(@"result %@ error %@",results,error);
+                                }];
 }
 
 @end
