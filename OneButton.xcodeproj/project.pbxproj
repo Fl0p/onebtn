@@ -94,8 +94,8 @@
 				DBAFAF7B1AC6C0B400D404C7 /* ViewController.h */,
 				DBAFAF7C1AC6C0B400D404C7 /* ViewController.m */,
 				DBAFAF7E1AC6C0B400D404C7 /* Main.storyboard */,
-				DBAFAF811AC6C0B400D404C7 /* Images.xcassets */,
 				DBAFAF831AC6C0B400D404C7 /* LaunchScreen.xib */,
+				DBAFAF811AC6C0B400D404C7 /* Images.xcassets */,
 				DBAFAF741AC6C0B400D404C7 /* Supporting Files */,
 			);
 			path = OneButton;
