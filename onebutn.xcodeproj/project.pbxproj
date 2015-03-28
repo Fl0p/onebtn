@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79399237D4081EC64928AE9D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563E09862E863A6BA1C2904A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DB32C6F81AC6ABBE0005CAB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32C6F71AC6ABBE0005CAB4 /* AppDelegate.swift */; };
 		DB32C6FA1AC6ABBE0005CAB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32C6F91AC6ABBE0005CAB4 /* ViewController.swift */; };
 		DB32C6FD1AC6ABBE0005CAB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB32C6FB1AC6ABBE0005CAB4 /* Main.storyboard */; };
@@ -26,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		542171A4D1599AE57A8BBD24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		563E09862E863A6BA1C2904A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB32C6F21AC6ABBE0005CAB4 /* onebutn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onebutn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB32C6F61AC6ABBE0005CAB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB32C6F71AC6ABBE0005CAB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		DB32C7071AC6ABBE0005CAB4 /* onebutnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onebutnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB32C70C1AC6ABBE0005CAB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB32C70D1AC6ABBE0005CAB4 /* onebutnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onebutnTests.swift; sourceTree = "<group>"; };
+		FCBB567E621757875A6CAD2B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79399237D4081EC64928AE9D /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C207AAC21F7533C1B000D43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				563E09862E863A6BA1C2904A /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DB32C6E91AC6ABBD0005CAB4 = {
 			isa = PBXGroup;
 			children = (
 				DB32C6F41AC6ABBE0005CAB4 /* onebutn */,
 				DB32C70A1AC6ABBE0005CAB4 /* onebutnTests */,
 				DB32C6F31AC6ABBE0005CAB4 /* Products */,
+				FF9F7442E280D712E65B3BE4 /* Pods */,
+				1C207AAC21F7533C1B000D43 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +127,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FF9F7442E280D712E65B3BE4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				542171A4D1599AE57A8BBD24 /* Pods.debug.xcconfig */,
+				FCBB567E621757875A6CAD2B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +143,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB32C7111AC6ABBE0005CAB4 /* Build configuration list for PBXNativeTarget "onebutn" */;
 			buildPhases = (
+				FE9798E164624E03D61D8C30 /* Check Pods Manifest.lock */,
 				DB32C6EE1AC6ABBE0005CAB4 /* Sources */,
 				DB32C6EF1AC6ABBE0005CAB4 /* Frameworks */,
 				DB32C6F01AC6ABBE0005CAB4 /* Resources */,
+				40E25253A4D8953C0DA3DBD8 /* Embed Pods Frameworks */,
+				B6D5A361DDC0EB41B8B2FD12 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,6 +233,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40E25253A4D8953C0DA3DBD8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6D5A361DDC0EB41B8B2FD12 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE9798E164624E03D61D8C30 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DB32C6EE1AC6ABBE0005CAB4 /* Sources */ = {
@@ -336,6 +411,7 @@
 		};
 		DB32C7121AC6ABBE0005CAB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 542171A4D1599AE57A8BBD24 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = onebutn/Info.plist;
@@ -346,6 +422,7 @@
 		};
 		DB32C7131AC6ABBE0005CAB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCBB567E621757875A6CAD2B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = onebutn/Info.plist;
@@ -407,6 +484,7 @@
 				DB32C7131AC6ABBE0005CAB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB32C7141AC6ABBE0005CAB4 /* Build configuration list for PBXNativeTarget "onebutnTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +493,7 @@
 				DB32C7161AC6ABBE0005CAB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
