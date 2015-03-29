@@ -10,8 +10,13 @@
 #import <Parse/Parse.h>
 #import "BFURL.h"
 #import <AVFoundation/AVFoundation.h>
+#import <SHAlertViewBlocks/SHAlertViewBlocks.h>
+#import "ViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic) UIBackgroundTaskIdentifier taskId;
 
 @end
 
@@ -30,11 +35,11 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     [self createParceUser];
-    
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
     [self parseRun];
  
+//    [self playRandomSound];
+    
     return YES;
 }
 
@@ -108,11 +113,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//    self.taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:NULL];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
+    [[UIApplication sharedApplication] endBackgroundTask:self.taskId];
     [self parseRun];
 }
 
@@ -167,7 +174,10 @@
     {
         // open application with silent push
         NSURL *appUrl = [NSURL URLWithString:[NSString stringWithFormat:@"onebtnscheme://pushed?fromuser=%@",userInfo[@"fromUser"]]];
-        [[UIApplication sharedApplication] openURL:appUrl];
+        [self processOpenURL:appUrl];
+//        [[UIApplication sharedApplication] openURL:appUrl];
+        
+        completionHandler(UIBackgroundFetchResultNoData);
     }
 }
 
@@ -199,9 +209,24 @@
             
             if (fromUser && ![[PFUser currentUser].objectId isEqualToString:fromUser])
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Uh-oh somebody pushed you!" message:@"Push back?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                UIAlertView *alertView = [UIAlertView SH_alertViewWithTitle:@"Uh-oh somebody pushed you!" andMessage:@"Push back?" buttonTitles:@[@"Yes"] cancelTitle:@"No" withBlock:^(NSInteger theButtonIndex) {
+                    if (theButtonIndex != alertView.cancelButtonIndex)
+                    {
+                        PFUser* user = [PFUser currentUser];
+                        NSString* userId = user.objectId;
+                        
+                        PFInstallation* install = [PFInstallation currentInstallation];
+                        NSString* installationId = install.installationId;
+                        
+                        [(ViewController *)self.window.rootViewController sendPushToUserId:fromUser fromUserId:userId withInstallationId:installationId];
+                    }
+                }];
                 [alertView show];
-                [self playRandomSound];
+
+                if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground && [[UIApplication sharedApplication] applicationState] != UIApplicationStateInactive)
+                {
+                    [self playRandomSound];
+                }
                 
                 return YES;
             }
@@ -213,9 +238,30 @@
 
 - (void)playRandomSound
 {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"pushSound%d",arc4random_uniform(4)] withExtension:@"wav"];
+//    if (![[[AVAudioSession sharedInstance] category] isEqualToString:AVAudioSessionCategoryPlayback] || [[AVAudioSession sharedInstance] categoryOptions] != AVAudioSessionCategoryOptionDefaultToSpeaker)
+//    {
+//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker|AVAudioSessionCategoryOptionMixWithOthers error:nil];
+//        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+//    }
     
-    AVPlayer *player = [AVPlayer playerWithURL:url];
-    [player play];
+    NSString *soundName = [NSString stringWithFormat:@"pushSound%d",arc4random_uniform(4)];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:soundName withExtension:@"wav"];
+    
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [player prepareToPlay];
+    
+    self.player = player;
+//    self.player.delegate = self;
+//    [[UIApplication sharedApplication] endBackgroundTask:self.taskId];
+    
+    if ([player play])
+    {
+//        self.taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:NULL];
+    }
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [[UIApplication sharedApplication] endBackgroundTask:self.taskId];
 }
 @end

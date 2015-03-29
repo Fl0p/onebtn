@@ -8,3 +8,4 @@ pod 'Facebook-iOS-SDK', '4.0'
  
 pod 'libextobjc'
 
+pod 'SHAlertViewBlocks'

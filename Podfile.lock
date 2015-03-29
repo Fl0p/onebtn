@@ -53,16 +53,19 @@ PODS:
   - libextobjc/UmbrellaHeader (0.4.1)
   - Parse (1.7.0):
     - Bolts (~> 1.1)
+  - SHAlertViewBlocks (1.2.1)
 
 DEPENDENCIES:
   - Facebook-iOS-SDK (= 4.0)
   - libextobjc
   - Parse (= 1.7.0)
+  - SHAlertViewBlocks
 
 SPEC CHECKSUMS:
   Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
   Facebook-iOS-SDK: 523ee69fdd3c37cdca6578c79912f47943035806
   libextobjc: d6146fce3ebea986b7f75fcb4c967639200b88b0
   Parse: 3c2d4e6ade7b59d31c0bc8106340c6b81b31bc0f
+  SHAlertViewBlocks: c442c863d629c11905f0ed0a206a1b930add22a8
 
 COCOAPODS: 0.36.0
