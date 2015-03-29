@@ -197,7 +197,7 @@
             
             NSString *fromUser = bfUrl.targetQueryParameters[@"fromuser"];
             
-            if (fromUser)
+            if (fromUser && ![[PFUser currentUser].objectId isEqualToString:fromUser])
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Uh-oh somebody pushed you!" message:@"Push back?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
                 [alertView show];
