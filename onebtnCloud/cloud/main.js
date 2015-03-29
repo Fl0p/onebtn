@@ -61,7 +61,11 @@ function sendPush(userId,toUserId) {
     var pushData = new Object();
 //    pushData.alert = "The push";
 //    pushData.title = "PUSH";
-    pushData.sound = "pushSound0.wav";
+    
+    var rand = Math.floor((Math.random() * 4) + 0);
+
+    pushData.sound = "pushSound" + rand + ".wav";
+    
     pushData["content-available"] = 1;
     pushData.fromUser = userId;
     
