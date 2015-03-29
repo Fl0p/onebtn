@@ -31,8 +31,8 @@
     
     [self createParceUser];
     
-
-    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     [self parseRun];
  
     return YES;
@@ -163,11 +163,11 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    if (userInfo[@"fromuser"])
+    if (userInfo[@"fromUser"])
     {
         // open application with silent push
-        NSURL *appUrl = [NSURL URLWithString:[NSString stringWithFormat:@"onebtnscheme://pushed?fromuser=%@",userInfo[@"fromuser"]]];
-        [application openURL:appUrl];
+        NSURL *appUrl = [NSURL URLWithString:[NSString stringWithFormat:@"onebtnscheme://pushed?fromuser=%@",userInfo[@"fromUser"]]];
+        [[UIApplication sharedApplication] openURL:appUrl];
     }
 }
 
