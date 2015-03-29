@@ -3,6 +3,7 @@
 // For example:
 
 var Push = Parse.Object.extend("Push");
+//var Installation = Parse.Object.extend("Installation");
 
 Parse.Cloud.useMasterKey();
 
@@ -14,9 +15,10 @@ Parse.Cloud.define("hello", function(request, response) {
 
 function incrementPush(userId) {
     
+    console.log("incrementPush "+userId);
     
     if (userId == null) {
-        response.error("No user in request getPushes");
+        console.log("No user in request getPushes");
         return;
     }
     
@@ -29,10 +31,10 @@ function incrementPush(userId) {
                     var pushInst = null;
                     
                     if (result == null) {
-                        console.log("push NOT Found");
+                        console.log("increment push NOT Found");
                         return;
                     } else {
-                        console.log("push Found");
+                        console.log("increment push Found");
                         pushInst = result;
                     }
                 
@@ -65,6 +67,7 @@ function sendPush(userId,toUserId) {
     var rand = Math.floor((Math.random() * 4) + 0);
 
     pushData.sound = "pushSound" + rand + ".wav";
+//    pushData.sound = "silent.wav";
     
     pushData["content-available"] = 1;
     pushData.fromUser = userId;
@@ -73,11 +76,27 @@ function sendPush(userId,toUserId) {
     
     if (toUserId == null) {
         //find random user
-        console.log( " - find random user " );
+        console.log( " - find random user " + userId );
+    
+        incrementPush(userId);
+        
+        var q = new Parse.Query(Push);
+        q.equalTo("userId", userId);
+        q.first({
+                    success: function(result) {
+                        console.log(" OLOLOLOLO ");
+                        console.log(" !!!!!! push Found" + result);
+                    },
+                    
+                    error: function(error) {
+                        console.log(" OLOLOLOLO ");
+                        console.log(error);
+                    
+                    }
+                });
         
         
-        
-        
+        console.log("inst q"+q);
         
         
         //return;
