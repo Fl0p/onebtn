@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "BFURL.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -200,11 +201,21 @@
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Uh-oh somebody pushed you!" message:@"Push back?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
                 [alertView show];
+                [self playRandomSound];
+                
                 return YES;
             }
         }
     }
     
     return NO;
+}
+
+- (void)playRandomSound
+{
+    NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"pushSound%d",arc4random_uniform(4)] withExtension:@"wav"];
+    
+    AVPlayer *player = [AVPlayer playerWithURL:url];
+    [player play];
 }
 @end

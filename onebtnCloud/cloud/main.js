@@ -59,10 +59,10 @@ function sendPush(userId,toUserId) {
     
 
     var pushData = new Object();
-    pushData.alert = "The push";
-    pushData.title = "PUSH";
+//    pushData.alert = "The push";
+//    pushData.title = "PUSH";
     pushData.sound = "pushSound0.wav";
-//    pushData["content-available"] = 1;
+    pushData["content-available"] = 1;
     pushData.fromUser = userId;
     
     var pushChannels = ["GLOBAL"]
