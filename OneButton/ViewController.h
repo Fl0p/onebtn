@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+- (void)sendPushToUserId:(NSString *)toUserId fromUserId:(NSString *)userId withInstallationId:(NSString *)installationId;
 
 @end
 

@@ -125,8 +125,20 @@
     PFInstallation* install = [PFInstallation currentInstallation];
     NSString* installationId = install.installationId;
     
+    [self sendPushToUserId:nil fromUserId:userId withInstallationId:installationId];
+}
+
+- (void)sendPushToUserId:(NSString *)toUserId fromUserId:(NSString *)userId withInstallationId:(NSString *)installationId
+{
+    NSMutableDictionary *dict = [@{@"userId":userId, @"installationId":installationId} mutableCopy];
+    
+    if (toUserId.length)
+    {
+        dict[@"toUserId"] = toUserId;
+    }
+    
     [PFCloud callFunctionInBackground:@"sendPush"
-                       withParameters:@{@"userId":userId, @"installationId":installationId}
+                       withParameters:dict
                                 block:^(NSNumber *result, NSError *error) {
                                     
                                     [self.loading stopAnimating];
@@ -136,7 +148,7 @@
                                         NSNumber* value = result;
                                         
                                         self.label.text = [NSString stringWithFormat:@"You can push button %@ times. \n Every time you push button random person will recieve your push",value];
-
+                                        
                                         
                                         if (value.intValue > 0) {
                                             self.button.enabled = YES;
@@ -153,8 +165,6 @@
                                     }
                                     
                                 }];
-    
-    
 }
 
 @end

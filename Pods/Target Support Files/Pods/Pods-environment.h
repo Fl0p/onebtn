@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_Parse 7
 #define COCOAPODS_VERSION_PATCH_Parse 0
 
+// SHAlertViewBlocks
+#define COCOAPODS_POD_AVAILABLE_SHAlertViewBlocks
+#define COCOAPODS_VERSION_MAJOR_SHAlertViewBlocks 1
+#define COCOAPODS_VERSION_MINOR_SHAlertViewBlocks 2
+#define COCOAPODS_VERSION_PATCH_SHAlertViewBlocks 1
+
 // libextobjc
 #define COCOAPODS_POD_AVAILABLE_libextobjc
 #define COCOAPODS_VERSION_MAJOR_libextobjc 0
