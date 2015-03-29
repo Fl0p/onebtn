@@ -29,7 +29,7 @@
     [self.loading startAnimating];
     
     
-    if ([[PFUser currentUser] isNew]) {
+    if ([[PFUser currentUser] isNew] || ![PFUser currentUser].objectId) {
         //wait untill save
         [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             //
