@@ -17,19 +17,33 @@ function sendPush(userId,toUserId) {
     
 
     var pushData = new Object();
-    pushData.alert = "The push";
+//    pushData.alert = "The push";
     pushData.title = "PUSH";
-    pushData.sound = "sound.waw";
+    pushData.sound = "silent.wav";
+    pushData["content-available"] = 1;
     pushData.fromUser = userId;
+    
+    var pushChannels = ["GLOBAL"]
+    
+    if (toUserId == null) {
+        //find random user
+        console.log( " - find random user " );
+        
+        
+        return;
+    }
+    
     
     
     if (toUserId != null) {
-
+        console.log( " - send push to channel " + toUserId);
+        pushChannels  = [toUserId];
+        console.log( console );
     }
     
     Parse.Push.send({
                     
-                    channels: ["GLOBAL"],
+                    channels: pushChannels,
                     push_time: new Date(new Date().getTime() + 5000),
                     data: pushData
                     }, {
