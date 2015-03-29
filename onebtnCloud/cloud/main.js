@@ -11,17 +11,27 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 
-function sendPush(userId) {
-    console.log(" sendPush " + userId);
+function sendPush(userId,toUserId) {
+    
+    console.log(" sendPush from " + userId + " to " + toUserId);
+    
+
+    var pushData = new Object();
+    pushData.alert = "The push";
+    pushData.title = "PUSH";
+    pushData.sound = "sound.waw";
+    pushData.fromUser = userId;
+    
+    
+    if (toUserId != null) {
+
+    }
     
     Parse.Push.send({
+                    
                     channels: ["GLOBAL"],
                     push_time: new Date(new Date().getTime() + 5000),
-                    data: {
-                    "alert": "The push",
-                    "sound": "default",
-                    "title": "OneButton"
-                    }
+                    data: pushData
                     }, {
                     success: function() {
                     // Push was successful
@@ -114,6 +124,7 @@ Parse.Cloud.define("sendPush", function(request, response) {
                    console.log(request);
                    
                    var userId = request.params.userId;
+                   var toUserId = request.params.toUserId;
                    
                    
                    if (userId == null) {
@@ -136,7 +147,7 @@ Parse.Cloud.define("sendPush", function(request, response) {
                                console.log("push Found");
                                var pushInst = result;
                                
-                               sendPush(userId);
+                               sendPush(userId,toUserId);
                                
                                var value = pushInst.get("value");
                                value--;
