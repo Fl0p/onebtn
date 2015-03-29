@@ -11,16 +11,58 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 
+
+function incrementPush(userId) {
+    
+    
+    if (userId == null) {
+        response.error("No user in request getPushes");
+        return;
+    }
+    
+    
+    var query = new Parse.Query(Push);
+    query.equalTo("userId", userId);
+    query.first({
+                success: function(result) {
+                
+                    var pushInst = null;
+                    
+                    if (result == null) {
+                        console.log("push NOT Found");
+                        return;
+                    } else {
+                        console.log("push Found");
+                        pushInst = result;
+                    }
+                
+                    var value = pushInst.get("value");
+                    value++;
+                    pushInst.set("value", value);
+                
+                    pushInst.save();
+
+                },
+                
+                error: function(error) {
+                
+                    console.log(error);
+                
+                }
+        });
+
+}
+
 function sendPush(userId,toUserId) {
     
     console.log(" sendPush from " + userId + " to " + toUserId);
     
 
     var pushData = new Object();
-//    pushData.alert = "The push";
+    pushData.alert = "The push";
     pushData.title = "PUSH";
-    pushData.sound = "silent.wav";
-    pushData["content-available"] = 1;
+    pushData.sound = "pushSound0.wav";
+//    pushData["content-available"] = 1;
     pushData.fromUser = userId;
     
     var pushChannels = ["GLOBAL"]
@@ -30,15 +72,21 @@ function sendPush(userId,toUserId) {
         console.log( " - find random user " );
         
         
-        return;
+        
+        
+        
+        
+        //return;
     }
     
     
     
     if (toUserId != null) {
         console.log( " - send push to channel " + toUserId);
-        pushChannels  = [toUserId];
-        console.log( console );
+        pushChannels  = ["GLOBAL",toUserId];
+        console.log( pushChannels );
+        
+        incrementPush(toUserId);
     }
     
     Parse.Push.send({
@@ -103,25 +151,25 @@ Parse.Cloud.define("getPushes", function(request, response) {
                    query.first({
                               success: function(result) {
                                
-                               var newPush = null;
-                               
-                               if (result == null) {
-                                    console.log("push NOT Found");
-                                    newPush = createNewPush(userId);
-                               } else {
-                                    console.log("push Found");
-                                    newPush = result;
-                               }
-                               
-                               console.log("8");
-                               response.success(newPush.get("value"));
-                               console.log("9");                               
+                                   var newPush = null;
+                                   
+                                   if (result == null) {
+                                        console.log("push NOT Found");
+                                        newPush = createNewPush(userId);
+                                   } else {
+                                        console.log("push Found");
+                                        newPush = result;
+                                   }
+                                   
+
+                                   response.success(newPush.get("value"));
+
                                },
                               
                               error: function(error) {
                                
-                               console.log(error);
-                               response.error(error);
+                                   console.log(error);
+                                   response.error(error);
                                
                                }
                               });
