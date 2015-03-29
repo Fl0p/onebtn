@@ -28,6 +28,34 @@
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
+    [self createParceUser];
+    
+
+    
+    [self parseRun];
+ 
+    return YES;
+}
+
+- (void)createParceUser {
+    
+    PFUser* currentUser = [PFUser currentUser];
+
+    if (currentUser.objectId) {
+        
+        [self registerForRemoteNotification];
+        
+    } else {
+        
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"saved user%@",error);
+            [self registerForRemoteNotification];
+        }];
+    
+    }
+}
+
+- (void)registerForRemoteNotification {
     //Notifications
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings  settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
@@ -39,10 +67,7 @@
          UIRemoteNotificationTypeSound];
     }
     
-    
-    [self parseRun];
- 
-    return YES;
+
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -54,7 +79,11 @@
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation[@"user"] = currentUser;
     
-    currentInstallation.channels = @[@"GLOBAL"];
+    [currentInstallation addUniqueObject:@"GLOBAL" forKey:@"channels"];
+    
+    NSString* userId = currentUser.objectId;
+    
+    [currentInstallation addUniqueObject:userId forKey:@"channels"];
     
     [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"saved installation%@",error);

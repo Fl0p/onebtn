@@ -19,7 +19,16 @@
 
 @implementation ViewController
 
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+
 - (void)viewDidLoad {
+    
+    [self setNeedsStatusBarAppearanceUpdate];
     [super viewDidLoad];
     
     
@@ -50,6 +59,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
 }
+
 
 - (void)showError:(NSError*)error {
     self.label.text = [NSString stringWithFormat:@"%@",error.localizedDescription];
