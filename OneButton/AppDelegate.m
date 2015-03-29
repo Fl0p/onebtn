@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-
+#import "BFURL.h"
 
 @interface AppDelegate ()
 
@@ -158,4 +158,53 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+# pragma mark - Pushes handling
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    if (userInfo[@"fromuser"])
+    {
+        // open application with silent push
+        NSURL *appUrl = [NSURL URLWithString:[NSString stringWithFormat:@"onebtnscheme://pushed?fromuser=%@",userInfo[@"fromuser"]]];
+        [application openURL:appUrl];
+    }
+}
+
+# pragma mark - Deep linking
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [self application:application openURL:url sourceApplication:nil annotation:nil];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [self processOpenURL:url];
+}
+
+- (BOOL)processOpenURL:(NSURL *)url
+{
+    if ([[url scheme] isEqualToString:@"onebtnscheme"])
+    {
+        if ([[url host] isEqualToString:@"pushed"])
+        {
+            BFURL *bfUrl = [BFURL URLWithURL:url];
+            
+            NSString *fromUser = bfUrl.targetQueryParameters[@"fromuser"];
+            
+            if (fromUser)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Uh-oh somebody pushed you!" message:@"Push back?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [alertView show];
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
 @end
