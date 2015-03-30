@@ -115,7 +115,7 @@ function sendPush(userId,toUserId) {
     Parse.Push.send({
                     
                     channels: pushChannels,
-                    push_time: new Date(new Date().getTime() + 5000),
+//                    push_time: new Date(new Date().getTime() + 5000),
                     data: pushData
                     }, {
                     success: function() {
